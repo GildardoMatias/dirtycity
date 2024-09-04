@@ -1,8 +1,20 @@
+import { useEffect, useState } from 'react'
+import { getData } from './resources'
 import Container from "./leaflet-container/leaflet.container";
-import MapView from "./leaflet/leaflet";
 
 export default function App() {
+
+  const [alertasData, setAlertasData] = useState([])
+
+  useEffect(() => {
+    getData('alertas').then(rs => {
+      setAlertasData(rs)
+      console.log('Response: ', rs)
+    })
+  }, [])
+
+
   return (
-    <Container />
+    <Container alertas={alertasData} />
   )
 }
